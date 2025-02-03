@@ -11,16 +11,18 @@ class EmotionClassifier:
         self.load_model()
 
     def load_model(self):
-        """Load the TFLite model for emotion classification"""
-        model_path = "model.tflite"
+        """Load the Keras model for emotion classification"""
+        model_path = "best_model.h5"
         if not os.path.exists(model_path):
             st.error(f"Error: {model_path} not found. Please ensure the model file is present in the project root directory.")
             st.info("Please train the model first using the provided training script. See README.md for instructions.")
             return
 
-        interpreter = tf.lite.Interpreter(model_path=model_path)
-        interpreter.allocate_tensors()
-        self.model = interpreter
+        try:
+            self.model = tf.keras.models.load_model(model_path)
+        except Exception as e:
+            st.error(f"Error loading model: {str(e)}")
+            self.model = None
 
     def preprocess_image(self, image: np.ndarray) -> np.ndarray:
         """Preprocess image for model input"""
@@ -40,14 +42,7 @@ class EmotionClassifier:
         if processed_image is None:
             return "unknown", 0.0
 
-        input_details = self.model.get_input_details()
-        output_details = self.model.get_output_details()
-
-        self.model.set_tensor(input_details[0]['index'], 
-                            np.expand_dims(processed_image, axis=0))
-        self.model.invoke()
-
-        predictions = self.model.get_tensor(output_details[0]['index'])
+        predictions = self.model.predict(np.expand_dims(processed_image, axis=0))
         emotion_idx = np.argmax(predictions[0])
         confidence = predictions[0][emotion_idx]
 

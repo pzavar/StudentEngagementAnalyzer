@@ -10,11 +10,11 @@ def render_upload_section():
     """)
 
     # Check for model file
-    if not os.path.exists("model.tflite"):
+    if not os.path.exists("best_model.h5"):
         st.warning("""
         ⚠️ Model file not found. Before using this application:
         1. Train the emotion classification model using the provided training script
-        2. Copy the generated 'model.tflite' file to the project root directory
+        2. Copy the generated 'best_model.h5' file to the project root directory
 
         See README.md for detailed instructions on model training.
         """)

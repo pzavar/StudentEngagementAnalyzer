@@ -1,5 +1,5 @@
 """
-Model training script for emotion classification using EfficientNetB0/MobileNetV2.
+Model training script for emotion classification using MobileNetV2.
 This script assumes the emotion dataset is loaded into a pandas DataFrame 'df'
 with columns for image paths and emotion labels.
 """
@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from tensorflow.keras.applications import EfficientNetB0, MobileNetV2
+from tensorflow.keras.applications import MobileNetV2
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D, Dropout
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
@@ -17,21 +17,18 @@ from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLRO
 from sklearn.model_selection import train_test_split
 from typing import Tuple, Dict, Any
 
-def create_model(model_type: str = 'efficientnet', input_shape: tuple = (224, 224, 3)) -> Model:
+def create_model(input_shape: tuple = (224, 224, 3)) -> Model:
     """
-    Create and return the neural network model.
+    Create and return the neural network model using MobileNetV2.
 
     Args:
-        model_type (str): Type of base model ('efficientnet' or 'mobilenet')
         input_shape (tuple): Input shape for the model
 
     Returns:
         Model: Compiled Keras model
     """
-    if model_type == 'efficientnet':
-        base_model = EfficientNetB0(weights='imagenet', include_top=False, input_shape=input_shape)
-    else:
-        base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=input_shape)
+    # Use MobileNetV2 as base model
+    base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=input_shape)
 
     # Freeze base model layers
     base_model.trainable = False
@@ -85,7 +82,6 @@ def preprocess_data(df: pd.DataFrame, input_shape: tuple = (224, 224)) -> Tuple[
 
 def train_model(
     df: pd.DataFrame,
-    model_type: str = 'efficientnet',
     epochs: int = 50,
     batch_size: int = 32,
     validation_split: float = 0.2
@@ -95,7 +91,6 @@ def train_model(
 
     Args:
         df (pd.DataFrame): DataFrame containing image paths and labels
-        model_type (str): Type of base model to use
         epochs (int): Number of training epochs
         batch_size (int): Batch size for training
         validation_split (float): Fraction of data to use for validation
@@ -113,7 +108,7 @@ def train_model(
     )
 
     # Create and compile model
-    model = create_model(model_type)
+    model = create_model()
 
     # Setup callbacks
     callbacks = [
@@ -223,37 +218,27 @@ def plot_training_results(history: Dict[str, Any], save_path: str = 'training_re
         plt.savefig(f'{save_path}_confusion.png', dpi=300, bbox_inches='tight')
         plt.close()
 
-def main(df: pd.DataFrame, model_type: str = 'efficientnet'):
+def main(df: pd.DataFrame):
     """
     Main training function with enhanced progress tracking.
 
     Args:
         df (pd.DataFrame): DataFrame containing image paths and emotion labels
-        model_type (str): Type of base model to use ('efficientnet' or 'mobilenet')
     """
     print("Starting model training process...")
 
     # Train model with progress tracking
-    model, history = train_model(df, model_type=model_type)
+    model, history = train_model(df)
 
     # Generate and save detailed visualizations
     print("Generating training visualizations...")
     plot_training_results(history)
 
-    # Save model to TFLite format for deployment
-    print("Converting model to TFLite format...")
-    converter = tf.lite.TFLiteConverter.from_keras_model(model)
-    converter.optimizations = [tf.lite.Optimize.DEFAULT]
-    tflite_model = converter.convert()
-
-    with open('model.tflite', 'wb') as f:
-        f.write(tflite_model)
-
     print("Training process completed successfully!")
-    print("- Model saved as 'model.tflite'")
+    print("- Model saved as 'best_model.h5'")
     print("- Training visualizations saved as 'training_results_*.png'")
 
 if __name__ == "__main__":
     # Example usage (assuming df is loaded)
-    # main(df, model_type='efficientnet')
+    # main(df)
     pass
