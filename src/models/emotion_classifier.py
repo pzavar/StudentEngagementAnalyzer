@@ -1,6 +1,8 @@
 import tensorflow as tf
 import numpy as np
 from typing import List, Tuple
+import os
+import streamlit as st
 
 class EmotionClassifier:
     def __init__(self):
@@ -10,7 +12,13 @@ class EmotionClassifier:
 
     def load_model(self):
         """Load the TFLite model for emotion classification"""
-        interpreter = tf.lite.Interpreter(model_path="model.tflite")
+        model_path = "model.tflite"
+        if not os.path.exists(model_path):
+            st.error(f"Error: {model_path} not found. Please ensure the model file is present in the project root directory.")
+            st.info("The emotion classification model file is required to run this application.")
+            return
+            
+        interpreter = tf.lite.Interpreter(model_path=model_path)
         interpreter.allocate_tensors()
         self.model = interpreter
 
