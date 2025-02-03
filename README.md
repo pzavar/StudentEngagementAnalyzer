@@ -29,7 +29,7 @@ This system helps professors analyze student engagement during recorded lectures
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/pzavar/StudentEngagementAnalyzer.git
 cd student-engagement-analysis
 ```
 
@@ -89,18 +89,7 @@ The emotion classification model uses transfer learning with either EfficientNet
 - Dropout (0.3)
 - Output layer (7 units, softmax activation)
 
-## Development
 
-### Code Style
-- Type hints for all function parameters and returns
-- Comprehensive docstrings following Google style
-- Clean, modular code organization
-
-### Adding New Features
-1. Create feature branch
-2. Implement changes
-3. Add tests if applicable
-4. Submit pull request
 
 ## License
 
