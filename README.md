@@ -25,7 +25,7 @@ This system helps professors analyze student engagement during recorded lectures
 
 ## Installation
 
-### Local Setup (macOS)
+### Local Setup
 
 1. Clone the repository:
 ```bash
@@ -33,15 +33,18 @@ git clone https://github.com/pzavar/StudentEngagementAnalyzer.git
 cd student-engagement-analysis
 ```
 
-2. Create and activate a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate
-```
-
-3. Install dependencies:
+2. Install dependencies using pip:
 ```bash
 pip install -r requirements.txt
+```
+
+Note: If using Anaconda/Jupyter, you can install the requirements in your Jupyter environment:
+```bash
+conda install --file requirements.txt
+```
+Or install individual packages:
+```bash
+conda install numpy opencv pandas plotly streamlit tensorflow
 ```
 
 ### Training the Model
@@ -66,7 +69,8 @@ The script will:
 streamlit run app.py
 ```
 
-2. Open your browser and navigate to `http://localhost:3000`
+2. The app will automatically open in your default browser
+   (typically at http://localhost:8501)
 
 ## Usage
 
