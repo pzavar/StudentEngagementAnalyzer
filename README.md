@@ -30,7 +30,11 @@ This system helps professors analyze student engagement during recorded lectures
 1. Clone the repository:
 ```bash
 git clone https://github.com/pzavar/StudentEngagementAnalyzer.git
+<<<<<<< HEAD
 cd student-engagement-analysis
+=======
+cd StudentEngagementAnalyzer
+>>>>>>> 3ba8f54 (plz)
 ```
 
 2. Install dependencies using pip:
