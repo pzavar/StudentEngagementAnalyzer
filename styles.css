@@ -1,0 +1,40 @@
+/* Custom styling for the Streamlit app */
+.stProgress > div > div > div > div {
+    background-color: #1f77b4;
+}
+
+/* Metric styling */
+[data-testid="stMetricValue"] {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1f77b4;
+}
+
+/* Header styling */
+.stHeader {
+    background-color: #f0f2f6;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* File uploader styling */
+.stFileUploader {
+    border: 2px dashed #1f77b4;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Sidebar styling */
+.sidebar .sidebar-content {
+    background-color: #f0f2f6;
+}
+
+/* Plot styling */
+.js-plotly-plot {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
