@@ -1,40 +1,142 @@
 /* Custom styling for the Streamlit app */
+
+/* Main container */
+.stApp {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Progress bar styling */
 .stProgress > div > div > div > div {
-    background-color: #1f77b4;
+    background: linear-gradient(90deg, #1f77b4 0%, #4a90e2 100%);
+    border-radius: 4px;
 }
 
 /* Metric styling */
 [data-testid="stMetricValue"] {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
     color: #1f77b4;
+    text-align: center;
+}
+
+[data-testid="stMetricLabel"] {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
 }
 
 /* Header styling */
 .stHeader {
-    background-color: #f0f2f6;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 /* File uploader styling */
 .stFileUploader {
     border: 2px dashed #1f77b4;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: rgba(31, 119, 180, 0.05);
+    transition: all 0.3s ease;
+}
+
+.stFileUploader:hover {
+    border-color: #4a90e2;
+    background-color: rgba(31, 119, 180, 0.1);
 }
 
 /* Sidebar styling */
-.sidebar .sidebar-content {
-    background-color: #f0f2f6;
+.css-1d391kg {  /* Sidebar */
+    background-color: #f8f9fa;
+    padding: 2rem 1rem;
+}
+
+.css-1d391kg .stSlider {
+    padding: 1rem 0;
 }
 
 /* Plot styling */
 .js-plotly-plot {
     background-color: white;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* Button styling */
+.stButton > button {
+    width: 100%;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    background-color: #1f77b4;
+    color: white;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+    background-color: #4a90e2;
+    transform: translateY(-1px);
+}
+
+/* Slider styling */
+.stSlider {
+    padding: 1rem 0;
+}
+
+.stSlider > div > div > div > div {
+    background-color: #1f77b4;
+}
+
+/* Text elements */
+.stMarkdown {
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+/* Tooltip styling */
+.stTooltipIcon {
+    color: #1f77b4;
+}
+
+/* Charts and visualizations */
+[data-testid="stDecoration"] {
+    border-bottom-color: #f1f1f1;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    .stApp {
+        background-color: #1a1a1a;
+    }
+
+    .stHeader {
+        background-color: #2d2d2d;
+    }
+
+    .css-1d391kg {
+        background-color: #2d2d2d;
+    }
+
+    .stMarkdown {
+        color: #e1e1e1;
+    }
+
+    h1, h2, h3 {
+        color: #e1e1e1;
+    }
 }
