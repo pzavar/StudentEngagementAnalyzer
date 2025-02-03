@@ -23,60 +23,58 @@ This system helps professors analyze student engagement during recorded lectures
 └── README.md              # Documentation
 ```
 
-## Installation
+## Local Setup with Jupyter (MacBook)
 
-### Local Setup
+### 1. Environment Setup
 
-1. Clone the repository:
+1. Install Anaconda if you haven't already:
+   - Visit [Anaconda Downloads](https://www.anaconda.com/download)
+   - Download and install Anaconda for macOS
+
+2. Open Terminal and create a new conda environment:
 ```bash
-git clone https://github.com/pzavar/StudentEngagementAnalyzer.git
-<<<<<<< HEAD
-cd student-engagement-analysis
-=======
-cd StudentEngagementAnalyzer
->>>>>>> 3ba8f54 (plz)
+conda create -n engagement python=3.8
+conda activate engagement
 ```
 
-2. Install dependencies using pip:
+3. Install required packages:
 ```bash
-pip install -r requirements.txt
+conda install jupyter tensorflow pandas numpy matplotlib seaborn scikit-learn
+conda install -c conda-forge opencv
+pip install streamlit plotly
 ```
 
-Note: If using Anaconda/Jupyter, you can install the requirements in your Jupyter environment:
-```bash
-conda install --file requirements.txt
-```
-Or install individual packages:
-```bash
-conda install numpy opencv pandas plotly streamlit tensorflow
-```
-
-### Training the Model
+### 2. Training the Model
 
 1. Download the [Emotion Recognition Dataset](https://www.kaggle.com/datasets/sujaykapadnis/emotion-recognition-dataset/data) from Kaggle
+   - You'll need a Kaggle account
+   - Download and extract the dataset to a folder on your MacBook
 
-2. Run the training script:
+2. Open Jupyter Notebook:
 ```bash
-python src/training/train_model.py
+jupyter notebook
 ```
 
-The script will:
-- Preprocess the dataset
-- Train the model using EfficientNetB0 or MobileNetV2
-- Generate training visualizations using seaborn
-- Save the model in TFLite format
+3. Navigate to the project directory and open `train_emotion_classifier.ipynb`
 
-### Running the Application
+4. Follow the step-by-step instructions in the notebook:
+   - Update the dataset path in the notebook to match your local path
+   - Run each cell in sequence
+   - The training process might take a while depending on your MacBook's specifications
+   - The trained model will be saved as `best_model.h5`
 
-1. Start the Streamlit server:
+### 3. Running the Application
+
+1. Copy the generated `best_model.h5` to the project root directory
+
+2. Start the Streamlit application:
 ```bash
 streamlit run app.py
 ```
 
-2. The app will automatically open in your default browser
-   (typically at http://localhost:8501)
+3. Open your browser and navigate to http://localhost:8501
 
-## Usage
+## Using the Application
 
 1. Upload a recorded Zoom lecture video
 2. Configure analysis parameters:
@@ -90,14 +88,26 @@ streamlit run app.py
 
 ## Model Architecture
 
-The emotion classification model uses transfer learning with either EfficientNetB0 or MobileNetV2 as the base model, with additional layers:
+The emotion classification model uses MobileNetV2 as the base model, with additional layers:
 - Global Average Pooling
 - Dropout (0.5)
 - Dense layer (256 units, ReLU activation)
 - Dropout (0.3)
-- Output layer (7 units, softmax activation)
+- Output layer (5 units, softmax activation)
 
+The model is optimized for:
+- Multi-face detection in Zoom grid layouts
+- Consistent student tracking across frames
+- Real-time processing of video frames
+- Handling varying lighting conditions
 
+## Video Processing Features
+
+- Enhanced face detection optimized for Zoom grid layouts
+- Automatic lighting adjustment for better face detection
+- Multi-face tracking with student ID persistence
+- Configurable sampling rate and confidence thresholds
+- Frame quality enhancement for better detection accuracy
 
 ## License
 
