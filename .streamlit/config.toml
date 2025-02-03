@@ -3,9 +3,14 @@
 port = 8501
 address = "0.0.0.0"
 headless = true
-enableCORS = true
-enableXsrfProtection = true
+enableCORS = false
+enableWebsocketCompression = false
 
 [browser]
-serverAddress = "0.0.0.0"
-serverPort = 8501
+gatherUsageStats = false
+
+[theme]
+primaryColor = "#1f77b4"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f8f9fa"
+textColor = "#2c3e50"
