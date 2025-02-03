@@ -38,7 +38,7 @@ def create_model(input_shape: tuple = (224, 224, 3)) -> Model:
     x = Dropout(0.5)(x)
     x = Dense(256, activation='relu')(x)
     x = Dropout(0.3)(x)
-    outputs = Dense(7, activation='softmax')(x)  # 7 emotion classes
+    outputs = Dense(5, activation='softmax')(x)  # 5 emotion classes
 
     model = Model(inputs=base_model.input, outputs=outputs)
     model.compile(

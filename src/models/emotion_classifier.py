@@ -6,7 +6,7 @@ import streamlit as st
 
 class EmotionClassifier:
     def __init__(self):
-        self.emotions = ['angry', 'disgust', 'fear', 'happy', 'neutral', 'sad', 'surprise']
+        self.emotions = ['angry', 'happy', 'neutral', 'sad', 'surprise']
         self.model = None
         self.load_model()
 
@@ -58,8 +58,6 @@ class EmotionClassifier:
             'surprise': 'highly engaged',
             'neutral': 'moderately engaged',
             'sad': 'not engaged',
-            'angry': 'not engaged',
-            'disgust': 'not engaged',
-            'fear': 'not engaged'
+            'angry': 'not engaged'
         }
         return engagement_mapping[emotion]
