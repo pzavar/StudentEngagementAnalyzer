@@ -26,9 +26,9 @@ def render_sidebar() -> Dict[str, Any]:
         sampling_rate = st.slider(
             "Sampling Rate (seconds)",
             min_value=30,
-            max_value=300,
+            max_value=120,
             value=60,
-            step=30,
+            step=15,
             help="Time interval between video frame captures. Lower values provide more "
                  "detailed analysis but require more processing time."
         )
