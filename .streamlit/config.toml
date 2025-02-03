@@ -2,3 +2,9 @@
 [server]
 port = 3000
 address = "0.0.0.0"
+headless = true
+enableCORS = false
+
+[browser]
+serverAddress = "0.0.0.0"
+serverPort = 3000
